@@ -14,6 +14,9 @@ export default defineNuxtConfig({
     ],
     '@nuxtjs/tailwindcss'
   ],
+  css: [
+    '~/assets/tailwind.css',
+  ],
   runtimeConfig: {
     basicAuthUser: '',    // via NUXT_BASIC_AUTH_USER
     basicAuthPassword: '', // via NUXT_BASIC_AUTH_PASSWORD
