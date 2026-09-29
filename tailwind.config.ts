@@ -5,6 +5,10 @@ export default <Partial<Config>>{
       './app/pages/**/*.vue',
       './app/storyblok/**/*.vue',
   ],
+  safelist: [
+    {pattern: /grid-cols-./}, 
+    {pattern: /grid-rows-./,}
+  ],
   theme: {
       extend: {
       },

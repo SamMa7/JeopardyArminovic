@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <main>
+  <main class="h-screen flex flex-col">
     <StoryblokComponent v-for="currentBlok in blok.body" :key="currentBlok._uid" :blok="currentBlok" />
   </main>
 </template>
