@@ -12,7 +12,9 @@ export default defineNuxtConfig({
         },
       },
     ],
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt',
   ],
   css: [
     '~/assets/tailwind.css',
@@ -21,5 +23,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     basicAuthUser: '',    // via NUXT_BASIC_AUTH_USER
     basicAuthPassword: '', // via NUXT_BASIC_AUTH_PASSWORD
+    public: {
+      storyblokApiToken: process.env.STORYBLOK_DELIVERY_API_TOKEN,
+    }
   },
 })
