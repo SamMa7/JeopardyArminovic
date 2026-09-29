@@ -16,6 +16,7 @@ export default defineNuxtConfig({
   ],
   css: [
     '~/assets/tailwind.css',
+    '~/assets/animations.css',
   ],
   runtimeConfig: {
     basicAuthUser: '',    // via NUXT_BASIC_AUTH_USER
