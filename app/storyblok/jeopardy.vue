@@ -43,9 +43,6 @@
     });
 
     useWebSocket(`/ws/websocket`, {
-        onConnected(ws) {
-            console.log('Connected!')
-        },
         onMessage(ws, event) {
             const message = event.data;
             console.log('Message: ', message);

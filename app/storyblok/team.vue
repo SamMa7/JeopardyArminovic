@@ -12,7 +12,11 @@
 <script setup lang="ts">
     const {blok} = defineProps({blok: Object});
 
-    const { status, send } = useWebSocket(`/ws/websocket`);
+    const { status, send } = useWebSocket(`/ws/websocket`, {
+        onConnected(ws) {
+            send(`Team ${teamName} ist Connected`)
+        },
+    });
 
     const teamName = blok?.teamName;
     const password = blok?.password;
