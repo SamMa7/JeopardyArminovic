@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import Team from '~/storyblok/team.vue';
 
 export type Team = {
     name: string,
@@ -13,16 +14,15 @@ export const useTeamsStore = defineStore('teams', () => {
         const storyblokApiToken = useRuntimeConfig().public.storyblokApiToken;
 
         try{
-            const response = await $fetch('https://api.storyblok.com/v2/cdn/datasource_entries?datasource=teams&token=' + storyblokApiToken);
-            const data = response.datasource_entries;
-
-            teams.value = data.map((team) => {
+            const response = await $fetch('https://api.storyblok.com/v2/cdn/stories?content_type=team&token=' + storyblokApiToken);
+            console.log(response)
+            teams.value = response.stories.map((story) => {
                 return {
-                    name: team.name,
-                    password: team.value,
+                    name: story.content.teamName,
+                    password: story.content.password,
                     points: 0,
                 }
-            })
+            });
         } catch (e) {
             console.log(e)
         }
