@@ -43,7 +43,7 @@
     const inputValue = ref(0);
 
     const messages = ref<string[]>([]);
-    const { status, send } = useWebSocket(`/ws/websocket`, {
+    const { status, send, open, close } = useWebSocket(`/ws/websocket`, {
         onMessage(ws, event) {
             const timestamp = new Date(event.timeStamp);
             const toTimeString = (time: number) => {
@@ -60,4 +60,11 @@
     const minusPoints = (team: String) => {
         send(`${team};Minus;${inputValue.value}`)
     };
+
+    onMounted(() => {
+        open()
+    })
+    onUnmounted(() => {
+        close();
+    })
 </script>

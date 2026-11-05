@@ -42,7 +42,7 @@
         return count;
     });
 
-    useWebSocket(`/ws/websocket`, {
+    const {open, close} = useWebSocket(`/ws/websocket`, {
         onMessage(ws, event) {
             const message = event.data;
             console.log('Message: ', message);
@@ -62,4 +62,11 @@
             }
         }
     });
+
+    onMounted(() => {
+        open()
+    })
+    onUnmounted(() => {
+        close();
+    })
 </script>

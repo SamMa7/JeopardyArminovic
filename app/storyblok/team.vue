@@ -12,9 +12,12 @@
 <script setup lang="ts">
     const {blok} = defineProps({blok: Object});
 
-    const { status, send } = useWebSocket(`/ws/websocket`, {
+    const { status, send, open, close } = useWebSocket(`/ws/websocket`, {
         onConnected(ws) {
             send(`Team ${teamName} ist Connected`)
+        },
+        onDisconnected(ws) {
+            send(`Team ${teamName} ist Disconnected`)
         },
     });
 
@@ -24,4 +27,11 @@
     const click = () => {
         send(`Team ${teamName} hat gedrückt!`)
     }
+
+    onMounted(() => {
+        open()
+    })
+    onUnmounted(() => {
+        close();
+    })
 </script>
