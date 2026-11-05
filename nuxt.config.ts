@@ -2,6 +2,11 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  nitro: {
+    experimental: {
+      websocket: true
+    }
+  },
   modules: [
     [
       "@storyblok/nuxt",
@@ -15,6 +20,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
+    '@vueuse/nuxt',
   ],
   css: [
     '~/assets/tailwind.css',

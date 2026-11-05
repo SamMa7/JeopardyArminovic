@@ -6,22 +6,31 @@
                 <div>Team Password: {{ team.password }}</div>
             </div>
             <div class="flex gap-3">
-                points:  {{ team.points }}
                 <input v-model="inputValue" type="number" />
-                <button @click="addPoints(team.name, inputValue)">add</button>
-                <button @click="substractPoints(team.name, inputValue)">substract</button>
+                <button @click="plusPoints(team.name)">add</button>
+                <button @click="minusPoints(team.name)">substract</button>
             </div>
         </div>
+        WebsocketState: {{ status }}
     </div>
 
-    <button @click="resetPoints" class="m-5">reset points</button>
+    <button @click="() => {resetPoints(); send('reset')}" class="m-5">reset points</button>
 </template>
 
 <script setup>
     import { useTeamsStore } from '~/stores/teams';
     const teamsStore = useTeamsStore();
     const { teams } = storeToRefs(teamsStore);
-    const { addPoints, substractPoints, resetPoints} = teamsStore;
+    import { useWebSocket } from '@vueuse/core'
+
+    const { status, send } = useWebSocket(`/ws/websocket`);
 
     const inputValue = ref(0);
+
+    const plusPoints = (team) => {
+        send(`${team};Plus;${inputValue.value}`);
+    };
+    const minusPoints = (team) => {
+        send(`${team};Minus;${inputValue.value}`)
+    };
 </script>

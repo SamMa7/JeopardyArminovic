@@ -49,5 +49,5 @@ export const useTeamsStore = defineStore('teams', () => {
         })
     };
 
-    return { teams, initializeTeams, addPoints, substractPoints, resetPoints };
+    return {teams, initializeTeams, addPoints, substractPoints, resetPoints};
 }, {persist: true})

@@ -26,6 +26,7 @@
 
     const teamsStore = useTeamsStore();
     const { teams } = storeToRefs(teamsStore);
+    const { resetPoints, addPoints, substractPoints} = teamsStore;
 
     const {blok} = defineProps({ blok: Object });
 
@@ -35,5 +36,29 @@
             if(category.questions.length > count) count = category.questions.length;
         });
         return count;
+    });
+
+    useWebSocket(`/ws/websocket`, {
+        onConnected(ws) {
+            console.log('Connected!')
+        },
+        onMessage(ws, event) {
+            const message = event.data;
+            console.log('Message: ', message);
+
+            if(message == 'reset') {
+                console.log('reset points');
+                resetPoints();
+                return;
+            }
+
+            const values = message.replace(' ', '').split(';');
+            if(values[1] == 'Plus') {
+                addPoints(values[0], Number(values[2]))
+            }
+            if(values[1] == 'Minus') {
+                substractPoints(values[0], Number(values[2]))
+            }
+        }
     });
 </script>
